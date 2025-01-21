@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<script type="text/javascript"> 
+    function init() {
+        updateUI(); 
+        
+    }
+
+    var score = { 'pScore1': "0", 'pScore2': "0"};
+
+    // Put the object into storage
+    localStorage.setItem('score', JSON.stringify(player));
+
+    // Retrieve the object from storage
+    var retrievedObject = localStorage.getItem('player');
+
+    console.log('retrievedObject: ', JSON.parse(retrievedObject));
+
+    function updateUI() {
+        document.getElementById('pScore1').value = localStorage.getItem('pScore1');
+        document.getElementById('pScore2').value = localStorage.getItem('pScore2');
+    }
+    
+    function saveRecords() { //saves input from text box to local storage
+        // console.log(localStorage.getItem('pScore1')); 
+        localStorage.setItem('pScore1', document.getElementById('pScore1').value);
+        localStorage.setItem('pScore2', document.getElementById('pScore2').value);
+    }
+
+    function deleteLocalStorage() {
+        localStorage.clear();
+        updateUI(); 
+    }
+
+    function resetScores() {
+        document.getElementById('pScore1').value = "0"; 
+        document.getElementById('pScore2').value = "0";
+    }
+
+    function swapPlayers() {
+        swap('pScore1', 'pScore2'); 
+        /*
+        let tempSwap = document.getElementById('pScore1').value;  
+        //console.log(document.getElementById('pScore1').value); 
+        
+        localStorage.setItem('pScore1', document.getElementById('pScore2').value); 
+        localStorage.setItem('pScore2', tempSwap);
+        */
+        
+        updateUI(); 
+    }
+
+    function swap(first, second) { //js doesn't have reference, so we will just do it here. 
+        let tempSwap = document.getElementById(first).value; 
+
+        localStorage.setItem(first, document.getElementById(second).value); 
+        localStorage.setItem(second , tempSwap);
+
+        return; 
+    }
+
+    
+</script>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body onLoad="init()">
+        <div id="board">
+            <div id="scoreboard"> 
+                <div id="areaPlayer1">
+                    Wins
+                    <input type="number" id="pScore1" class="score">
+                </div>
+
+
+                <div id="areaPlayer2">
+                    Losses
+                    <input type="number" id="pScore2" class="score">
+                </div>
+
+                <input type="submit" value="Save Records" onClick="saveRecords()"></button> 
+                <input type="submit" value="Delete Records" onClick="deleteLocalStorage()"></button>
+                <input type="submit" value="Reset Scores" onClick="resetScores()"></button>
+                <input type="submit" value="Swap Players" onClick="swapPlayers()"></button> 
+            </div>
+
+        </div>
+    </body>
+</html>
+

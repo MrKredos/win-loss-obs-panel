@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<style>
+body {
+  background-color: none;
+}
+
+    #score {
+        font-size: 50px;
+        color: white; 
+        font-family: Bebas Neue Regular,  Courier New, Courier, monospace; 
+    }
+
+</style>
+
+<script type="text/javascript"> 
+    function updateUI() {
+        let name = localStorage.getItem('pScore1') + " - " + localStorage.getItem('pScore2');
+        document.getElementById('score').innerHTML = name; 
+
+
+    }
+
+    function init(){
+        let name = localStorage.getItem('pScore1') + " - " + localStorage.getItem('pScore2');
+        document.getElementById('score').innerHTML = name; 
+
+        window.addEventListener("storage", function (e) {
+        // do your checks to detect\
+        updateUI() 
+        document.getElement
+        // changes in "e1", "e2" & "e3" here
+        }, false);
+
+        window.addEventListener("storage", () => {
+        // When local storage changes, dump the list to
+        // the console.
+        console.log(JSON.parse(window.localStorage.getItem("sampleList")));
+});
+    }
+
+</script>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Title</title>
+    </head>
+    
+    <body onLoad="init()">
+        <div> 
+            <div id="score">0 - 0</div>
+        </div>
+    
+        
+    </body>
+</html>
